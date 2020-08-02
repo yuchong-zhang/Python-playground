@@ -114,3 +114,4 @@ with smtplib.SMTP('smtp.gmail.com', 587) as smtp:
     msg=f'Subject: {subject}\n\n{body}'
     smtp.sendmail(EMAIL_ADDRESS, RECEIVER_EMAIL_ADDRESS, msg) #specify the receiver email address 
 
+#use cron or anacron to push the citation update to your email periodically
