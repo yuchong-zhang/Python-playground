@@ -1,2 +1,2 @@
 # Python-playground
-This is a repo where I play with different libraries and functionalities of Python.
+This collection includes some interesting applications that leverage different modules and functionalities of Python. Many of these ideas come from the tutorial of Corey Schafer (<a href='https://www.youtube.com/user/schafer5'>Youtube link</a>), which I strongly recommend for those who are interested in learning Python or those who want to know more about the capabilities of Python. From the tutorial, I learn OOP, web scraping, database connection and many others. I play with those concepts or tools and write applications like airline/hotel accounts management and paper citation auto-check both for fun and practice.
