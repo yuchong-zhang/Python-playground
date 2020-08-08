@@ -40,6 +40,20 @@ class account:
             self.expiration_date='never'
         else:
             self.expiration_date=expiration_date
+
+    @classmethod
+    def from_string(cls, input):
+        info=input.split('-')
+        if len(info)==4:
+            return cls(info[0], info[1], int(info[2]), info[3])
+        elif len(info)==3:
+            return cls(info[0], info[1], int(info[2]), '')
+        else:
+            raise Exception("Wrong input")
+
+    @staticmethod
+    def today():
+        return datetime.datetime.today()
         
     def total_value(self):
         return self.balance*self.value_per_point*0.01
@@ -72,7 +86,7 @@ class bank(account):
 
 #example
 UA=airline('United MileagePlus','SH489204',8000,'')
-AA=airline('American AAdvantage','4G33HK0',10000,'9/1/2021')
+AA=airline.from_string('American AAdvantage-4G33HK0-10000-9/1/2021')
 print(AA.expiration_date)
 print(UA.expiration_in())
 
