@@ -3,6 +3,7 @@ import sqlite3
 import smtplib
 import requests
 from bs4 import BeautifulSoup
+import datetime
 
 def insert_paper(entry):
     with conn:
@@ -65,14 +66,23 @@ new_paper_sum=len(paper_list)
 new_citation_sum=sum([paper[1] for paper in paper_list])
 paper_diff=new_paper_sum-old_paper_sum
 citation_diff=new_citation_sum-old_citation_sum
+date_cur=datetime.datetime.today().strftime("%b %d, %Y")
+
+#pre-create a "checkdate.txt" file in the folder
+with open("checkdate.txt", "r+") as f:
+    date_last = f.read()
+    f.seek(0)
+    f.write(date_cur)
+    f.truncate()
+
 if paper_diff==0 and citation_diff==0:
-    diff_str=' (no changes)'
+    diff_str=f' (no changes since {date_last})'
 elif paper_diff==0:
-    diff_str=f' (citation changes by {citation_diff})'
+    diff_str=f' (citation changes by {citation_diff} since {date_last})'
 elif citation_diff==0:
-    diff_str=f' (publication changes by {paper_diff})'
+    diff_str=f' (publication changes by {paper_diff} since {date_last})'
 else:
-    diff_str=f' (publication changes by {paper_diff} and citation changes by {citation_diff})'
+    diff_str=f' (publication changes by {paper_diff} and citation changes by {citation_diff} since {date_last})'
 subject='Your google scholar citation update'+diff_str
 body=body+f'Total publications: {new_paper_sum} (change by {paper_diff})\n'
 body=body+f'Total citations: {new_citation_sum} (change by {citation_diff})\n\n'
